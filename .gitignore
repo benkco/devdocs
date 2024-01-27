@@ -1,6 +1,23 @@
 # Folders
 node_modules
-.next
 
-# Files
+# Next.js
+.next
+/out/
+
+# next-sitemap
+.contentlayer
+
+# Secret
 .env.*
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+.vscode
+
+# vercel
+.vercel

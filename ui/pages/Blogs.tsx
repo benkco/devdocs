@@ -1,6 +1,14 @@
 import { FC, ReactNode } from 'react'
-import { Header, Hero } from '@/ui/components'
-import { CategoriesAndBlogs } from '@/data'
+import { Header, Hero, BlogItem } from '@/ui/components'
+// import { CategoriesAndBlogs } from '@/data'
+
+import { allDocuments } from 'contentlayer/generated'
+import {groupBy, chunk} from '@/helpers'
+
+type docsType = typeof allDocuments;
+
+const docsGrouped = groupBy<docsType>(allDocuments, 'language')
+const allDocs = chunk<docsType>(docsGrouped)
 
 const CloudApp: FC = (): ReactNode => {
     return (
@@ -8,83 +16,21 @@ const CloudApp: FC = (): ReactNode => {
             <Header />
             <Hero />
 
-            <div className="w-full h-[1px] bg-gray-100 my-1" />
+            {allDocs.map((blogsGroup, blogGroupIndex) => {
+                const blogItem = Object.values(blogsGroup)
 
-            <div className="flex md:flex-row flex-col gap-4 my-10">
-                {CategoriesAndBlogs.first.map((f, index) => (
-                    <div className="md:w-1/2 w-full" key={index}>
-                        <div className="font-semibold mb-2">
-                            {f.title}
-                        </div>
+                if(!blogItem || blogItem.length === 0) {
+                    return <h1>No Blogs.</h1>
+                }
 
-                        <div className='flex flex-col gap-1 w-atuo'>
-                            {f.topics.map((t, index) => (
-                                <div key={index} className="flex w-auto items-center gap-2 px-2 py-1.5 hover:bg-slate-100 hover:cursor-pointer rounded-lg transition-all ease-in-out duration-500">
-                                    <div className="text-lg">
-                                        {t.icon}
-                                    </div>
-
-                                    <div className="text-base text-slate-600">
-                                        {t.title}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                return (
+                    <div>
+                        {blogGroupIndex > 0 && <div className="w-full h-[1px] bg-gray-100 my-1" />}
+                        <BlogItem key={blogGroupIndex} details={blogItem} />
                     </div>
-                ))}
-            </div>
+                )
+            })}
 
-            <div className="w-full h-[1px] bg-gray-100 my-1" />
-
-            <div className="flex md:flex-row flex-col gap-4 my-10">
-                {CategoriesAndBlogs.second.map((f, index) => (
-                    <div className="md:w-1/2 w-full" key={index}>
-                        <div className="font-semibold mb-2">
-                            {f.title}
-                        </div>
-
-                        <div className='flex flex-col gap-1 w-atuo'>
-                            {f.topics.map((t, index) => (
-                                <div key={index} className="flex w-auto items-center gap-2 px-2 py-1.5 hover:bg-slate-100 hover:cursor-pointer rounded-lg transition-all ease-in-out duration-500">
-                                    <div className="text-lg">
-                                        {t.icon}
-                                    </div>
-                                    
-                                    <div className="text-base text-slate-600">
-                                        {t.title}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <div className="w-full h-[1px] bg-gray-100 my-1" />
-
-            <div className="flex md:flex-row flex-col gap-4 my-10">
-                {CategoriesAndBlogs.third.map((f, index) => (
-                    <div className="md:w-1/2 w-full" key={index}>
-                        <div className="font-semibold mb-2">
-                            {f.title}
-                        </div>
-
-                        <div className='flex flex-col gap-1 w-atuo'>
-                            {f.topics.map((t, index) => (
-                                <div key={index} className="flex w-auto items-center gap-2 px-2 py-1.5 hover:bg-slate-100 hover:cursor-pointer rounded-lg transition-all ease-in-out duration-500">
-                                    <div className="text-lg">
-                                        {t.icon}
-                                    </div>
-                                    
-                                    <div className="text-base text-slate-600">
-                                        {t.title}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
         </div>
     )
 }
