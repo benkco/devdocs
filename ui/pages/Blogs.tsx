@@ -20,13 +20,13 @@ const CloudApp: FC = (): ReactNode => {
                 const blogItem = Object.values(blogsGroup)
 
                 if(!blogItem || blogItem.length === 0) {
-                    return <h1>No Blogs.</h1>
+                    return <h1 key={blogGroupIndex}>No Blogs.</h1>
                 }
 
                 return (
-                    <div>
+                    <div key={blogGroupIndex}>
                         {blogGroupIndex > 0 && <div className="w-full h-[1px] bg-gray-100 my-1" />}
-                        <BlogItem key={blogGroupIndex} details={blogItem} />
+                        <BlogItem details={blogItem} />
                     </div>
                 )
             })}
