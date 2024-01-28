@@ -1,13 +1,23 @@
 type Item = { [key: string]: any }
 
-export const groupBy = <T extends Item>(array: T[], key: string): Record<string, T[]> => {
-    return array.reduce((result, item) => {
-        (result[item[key]] = result[item[key]] || []).push(item)
-        return result
-    }, {} as Record<string, T[]>)
+export const groupBy = <T extends Item>(
+    array: T[],
+    key: string
+): Record<string, T[]> => {
+    return array.reduce(
+        (result, item) => {
+            ;(result[item[key]] = result[item[key]] || []).push(item)
+            return result
+        },
+        {} as Record<string, T[]>
+    )
 }
 
-export const chunk = <T extends Record<string, any>>(obj: T, size: number = 2, limit: number = 3): T[] => {
+export const chunk = <T extends Record<string, any>>(
+    obj: T,
+    size: number = 2,
+    limit: number = 3
+): T[] => {
     const keys = Object.keys(obj)
 
     return Array.from({ length: Math.ceil(keys.length / size) }, (_, index) => {

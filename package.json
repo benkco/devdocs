@@ -5,6 +5,7 @@
     "scripts": {
         "dev": "eslint . --ext .js,.ts,.jsx,.tsx --config .eslintrc.json && next dev -p 2000",
         "build": "eslint . --ext .js,.ts,.jsx,.tsx --config .eslintrc.json && next build",
+        "build--debug": "eslint . --ext .js,.ts,.jsx,.tsx --config .eslintrc.json && next build --debug",
         "start": "next start -p 2000"
     },
     "dependencies": {

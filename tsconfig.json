@@ -4,6 +4,7 @@
         "**/*.ts",
         "**/*.tsx",
         ".next/types/**/*.ts",
+        "./ts/**/*.d.ts",
         ".contentlayer/generated",
         "contentlayer.config.ts"
     ],
