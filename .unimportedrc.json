@@ -1,4 +1,5 @@
 {
+  "ignoreUnresolved": [],
   "ignorePatterns": [
     "**/node_modules/**",
     "**/*.tests.{js,jsx,ts,tsx}",
@@ -21,6 +22,5 @@
     "@tailwindcss/forms",
     "eslint-config-next",
     "autoprefixer"
-  ],
-  "ignoreUnresolved": []
+  ]
 }

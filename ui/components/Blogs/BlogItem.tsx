@@ -1,5 +1,5 @@
 import { type BlogItemTypes, type ArrayAt } from '@/ts'
-import { Languages } from '../../../ts/Types'
+import Link from 'next/link'
 
 type BlogProps = BlogItemTypes & {
     at?: ArrayAt<BlogItemTypes>
@@ -20,16 +20,20 @@ const BlogItem = ({ details: blogDetails }: BlogItemProps) => {
 
                     <div className="flex flex-col gap-1 w-auto">
                         {Array.isArray(group) &&
-                            group?.map((item, itemIndex) => (
-                                <div
+                            group?.map((item: any, itemIndex) => (
+                                <Link
+                                    href={item?._raw?.flattenedPath}
                                     key={itemIndex}
                                     className="flex w-auto items-center gap-2 px-2 py-1.5 hover:bg-slate-100 dark:hover:bg-zinc-900 dark:group hover:cursor-pointer rounded-lg transition-all ease-in-out duration-500"
                                 >
-                                    <div className="text-lg">{item.emoji}</div>
+                                    <div className="text-lg">
+                                        {item.emoji}
+                                    </div>
+
                                     <div className="text-base text-slate-600 dark:group-hover:text-white">
                                         {item.title}
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                     </div>
                 </div>

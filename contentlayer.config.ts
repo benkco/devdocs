@@ -2,7 +2,6 @@ import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 
-
 export const BlogPost = defineDocumentType(() => ({
     name: 'Post',
     filePathPattern: '**/**/*.mdx',
