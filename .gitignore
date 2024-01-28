@@ -1,6 +1,11 @@
-# Folders
+# Ignores
 node_modules
 .next
-
-# Files
+/out/
+.contentlayer
 .env.*
+/build
+.DS_Store
+*.pem
+.vscode
+.vercel

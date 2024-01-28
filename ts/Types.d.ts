@@ -15,6 +15,16 @@ export type OnlyChildrenTypes = {
     [key: string]: ReactNode | string
 }
 
+export type BlogItemTypes = {
+    author: string
+    github: string
+    title: string
+    date: string
+    emoji: string
+    language: string
+    tags: string[]
+}
+
 export type FormOnChangeTypes = {
     Profile: ProfileInterface
     SetProfile: Function
