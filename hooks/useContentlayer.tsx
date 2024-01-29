@@ -21,8 +21,6 @@ const useContentLayer = ({ mdxSlug = '' }: CustomHookProps = {}) => {
     const reqTag = reqUrl.at(1)
     const reqSlug = reqUrl.at(-1)
 
-    console.log(reqUrl)
-
     const blog = allDocuments.find((article) => {
         const articleUrl = `/${article._raw.flattenedPath}`.split('/')
         const articleTag = articleUrl.at(1)

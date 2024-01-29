@@ -9,16 +9,16 @@ type SingleBlogProps = {
 }
 
 const SingleBlog: FC<SingleBlogProps> = ({ postSlug }): ReactNode => {
-    const { blogContent, mdxComponent: BlogContent } = useContentLayer(postSlug)
+    const { blogContent, mdxComponent: MdxBodyRaw } = useContentLayer(postSlug)
 
-    if (!blogContent) {
+    if (!blogContent || !MdxBodyRaw) {
         return <Error mode="404" />
     }
 
     return (
+        // @ts-ignore
         <Blog details={blogContent}>
-            {/* @ts-ignore */}
-            <BlogContent />
+            <MdxBodyRaw />
         </Blog>
     )
 }
