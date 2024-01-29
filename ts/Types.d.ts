@@ -193,7 +193,7 @@ export type InputTypes = {
     classes?: string
     type: string
     input: 'input' | 'textarea'
-    rows?: number,
+    rows?: number
     inputStyle?: string
 }
 
@@ -360,28 +360,29 @@ export type UserStateType = {
 }
 
 export type RequestType = {
-    method: 'POST',
-    headers: Record<string, string>,
+    method: 'POST'
+    headers: Record<string, string>
     body: string
 }
 
 export type RequestProps = {
-    target: string, 
-    token: string | null,  
+    target: string
+    token: string | null
     payload: any
 }
 
 export type AuthUserProps = {
-    token: string, 
-    name: string, 
-    email: string, 
+    token: string
+    name: string
+    email: string
     avatar: string
     uid: string
 }
 
 export type RequestResponseTypes = {
-    success: boolean, 
-    data: any, message: string, 
+    success: boolean
+    data: any
+    message: string
 }
 
 export type SecondaryColumnTypes = {
@@ -389,56 +390,56 @@ export type SecondaryColumnTypes = {
 }
 
 export type SelectOptionType = {
-    id: number,
-    value: string,
+    id: number
+    value: string
     name: string
 }
 
 export type SelectType = {
-    options: SelectOptionType[],
-    setValue: any,
-    label?: string,
-    disabledOption?: string,
+    options: SelectOptionType[]
+    setValue: any
+    label?: string
+    disabledOption?: string
     selectStyle?: string
 }
 
 export type DomainStateType = {
-    Domain: DomainInterface,
-    SetDomain: (newDomainName: string) => void 
+    Domain: DomainInterface
+    SetDomain: (newDomainName: string) => void
 }
 
 export type DomainChange = {
-    Domain: DomainInterface,
-    SetDomain: Function,
-    target: string,
+    Domain: DomainInterface
+    SetDomain: Function
+    target: string
     value: string
 }
 
 export type DropdownActions = {
-    id: number,
-    title: string,
-    description?: string,
-    icon: ReactNode,
-    onClick?: ()=> void,
+    id: number
+    title: string
+    description?: string
+    icon: ReactNode
+    onClick?: () => void
     href?: any
 }
 
 export type OtherLinks = {
-    id: number,
-    link: string,
+    id: number
+    link: string
     icon: ReactNode
 }
 
 export type DropdownType = {
-    dropDownList: DropdownActions[],
-    otherLinks?: OtherLinks[],
+    dropDownList: DropdownActions[]
+    otherLinks?: OtherLinks[]
     type: string
 }
 
 export type HeaderLinks = {
-    id: number,
-    name: string,
-    path: string,
+    id: number
+    name: string
+    path: string
     modal?: ReactNode
 }
 
@@ -450,39 +451,38 @@ export type AdminPageHeaderComponentProps = {
     translation: string
 }
 
-export type Button = { 
-    text: string,
-    color: string,
-    onClick: () => void,
+export type Button = {
+    text: string
+    color: string
+    onClick: () => void
     classes?: string
 }
 
 export type Icons = {
-    name: string,
+    name: string
     icon: ReactNode
 }
 
 export type IconsList = {
-    collection: string,
-    dimensions: string,
-    description: string,
+    collection: string
+    dimensions: string
+    description: string
     icons: Icons[]
 }
 
 export type IcebergList = {
-    id: number,
-    image: string,
-    title: string,
+    id: number
+    image: string
+    title: string
     text: string
 }
 
 export type TwitterAccount = {
-    accountName: string,
+    accountName: string
     username: string
 }
 
-
 export type TweetList = {
-    tweet: string,
+    tweet: string
     account: TwitterAccount
 }

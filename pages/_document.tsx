@@ -8,7 +8,7 @@ const document: FC = (): ReactNode => {
         <Html>
             <Head />
 
-            <body>
+            <body className="dark:text-white">
                 <Main />
                 <NextScript />
             </body>

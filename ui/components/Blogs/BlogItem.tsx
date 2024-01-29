@@ -24,13 +24,12 @@ const BlogItem = ({ details: blogDetails }: BlogItemProps) => {
                                 <Link
                                     href={item?._raw?.flattenedPath}
                                     key={itemIndex}
-                                    className="flex w-auto items-center gap-2 px-2 py-1.5 hover:bg-slate-100 dark:hover:bg-zinc-900 dark:group hover:cursor-pointer rounded-lg transition-all ease-in-out duration-500"
+                                    title={item.title}
+                                    className="flex w-auto items-center gap-2 px-2 py-1.5 hover:bg-slate-100 dark:hover:bg-zinc-900 group hover:cursor-help rounded-lg transition-all ease-in-out duration-500"
                                 >
-                                    <div className="text-lg">
-                                        {item.emoji}
-                                    </div>
+                                    <div className="text-lg">{item.emoji}</div>
 
-                                    <div className="text-base text-slate-600 dark:group-hover:text-white">
+                                    <div className="text-base text-slate-600 dark:group-hover:text-neutral-400 truncate overflow-hidden hover:cursor-pointer">
                                         {item.title}
                                     </div>
                                 </Link>

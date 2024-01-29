@@ -5,16 +5,16 @@
     --background-scheme: var(--light);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
     :root {
-        --color-scheme: var(--light);
+        --color-scheme: var(--dark);
         --background-scheme: var(--light);
     }
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-scheme: var(--dark);
+        --color-scheme: var(--light);
         --background-scheme: var(--dark);
     }
 }
