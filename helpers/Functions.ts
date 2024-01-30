@@ -1,16 +1,18 @@
 type Item = { [key: string]: any }
 
-export const groupBy = <T extends Item>(
-    array: T[],
-    key: string
-): Record<string, T[]> => {
-    return array.reduce(
-        (result, item) => {
-            ;(result[item[key]] = result[item[key]] || []).push(item)
-            return result
-        },
-        {} as Record<string, T[]>
-    )
+export const groupDocs = <T extends Item>(array: T[]): [T[], T[]] => {
+    const languages: T[] = []
+    const frameworks: T[] = []
+
+    array.forEach((item) => {
+        if (item.tags && /\bframework\b/i.test(item.tags)) {
+            frameworks.push(item)
+        } else {
+            languages.push(item)
+        }
+    })
+
+    return [languages, frameworks]
 }
 
 export const chunk = <T extends Record<string, any>>(
@@ -27,7 +29,11 @@ export const chunk = <T extends Record<string, any>>(
 
         const chunkObject: Record<string, any> = {}
         chunkKeys.forEach((key) => {
-            chunkObject[key] = obj[key].slice(0, limit)
+            if (Array.isArray(obj[key])) {
+                chunkObject[key] = obj[key].slice(0, limit)
+            } else {
+                chunkObject[key] = obj[key]
+            }
         })
 
         return chunkObject as T

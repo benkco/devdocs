@@ -1,12 +1,13 @@
+import { useMemo } from 'react'
 import { allDocuments } from 'contentlayer/generated'
-import { groupBy, chunk } from '@/helpers'
+import { groupDocs, chunk } from '@/helpers'
 import { format, parseISO } from 'date-fns'
 import { getMDXComponent } from 'next-contentlayer/hooks'
 
 /*
     @param explaining functions
-    groupBy = fn(obj, groupByItemKeyName) => {language: array[{...blogItems}]}[]
-    chunk = fn(object, columns, limit) => {...blogItems}[]
+    groupDocs = fn(obj) => {...blogItems}[] //! Filters Languages and Frameworks based on Post Tag 'framework'
+    chunk = fn(object, columns = 2, limit = 3) => {...blogItems}[] //! Sorting
 */
 
 type CustomHookProps = {
@@ -14,25 +15,32 @@ type CustomHookProps = {
 }
 
 const useContentLayer = ({ mdxSlug = '' }: CustomHookProps = {}) => {
-    const allDocs = groupBy(allDocuments, 'language')
-    const documents = chunk(allDocs)
+    const [allLanguages, allFrameworks] = useMemo(
+        () => groupDocs(allDocuments),
+        []
+    )
+
+    const languages = useMemo(() => chunk(allLanguages), [allLanguages])
+    const frameworks = useMemo(() => chunk(allFrameworks), [allFrameworks])
 
     const reqUrl = mdxSlug.split('/')
     const reqTag = reqUrl.at(1)
     const reqSlug = reqUrl.at(-1)
 
-    const blog = allDocuments.find((article) => {
-        const articleUrl = `/${article._raw.flattenedPath}`.split('/')
-        const articleTag = articleUrl.at(1)
-        const articleSlug = articleUrl.at(-1)
+    const blog = useMemo(
+        () =>
+            allDocuments.find((article) => {
+                const articleUrl = `/${article._raw.flattenedPath}`.split('/')
+                const articleTag = articleUrl.at(1)
+                const articleSlug = articleUrl.at(-1)
 
-        const isExistingTag = reqTag === 'blog' || reqTag === articleTag
-        const isExistingBlog = reqSlug === articleSlug
+                const isExistingTag = reqTag === 'blog' || reqTag === articleTag
+                const isExistingBlog = reqSlug === articleSlug
 
-        if (isExistingTag && isExistingBlog) {
-            return article
-        }
-    })
+                return isExistingTag && isExistingBlog ? article : undefined
+            }),
+        [allDocuments, reqTag, reqSlug]
+    )
 
     let content, updatedBlog
 
@@ -45,7 +53,7 @@ const useContentLayer = ({ mdxSlug = '' }: CustomHookProps = {}) => {
     }
 
     return {
-        allDocuments: documents,
+        allDocuments: { languages, frameworks },
         blogContent: updatedBlog,
         mdxComponent: content
     }

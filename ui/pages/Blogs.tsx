@@ -1,5 +1,5 @@
-import { FC, ReactNode, useEffect, useState } from 'react'
-import { Header, Hero, BlogItem } from '@/ui/components'
+import { FC, ReactNode } from 'react'
+import { Header, Hero, BlogGroup } from '@/ui/components'
 // import { CategoriesAndBlogs } from '@/data'
 
 import { useContentLayer } from '@/hooks'
@@ -12,23 +12,9 @@ const CloudApp: FC = (): ReactNode => {
             <Header />
             <Hero />
 
-            {allDocuments.map((blogsGroup, blogGroupIndex) => {
-                const blogItem = Object.values(blogsGroup)
+            <BlogGroup details={allDocuments.languages} />
 
-                if (!blogItem || blogItem.length === 0)
-                    return <h1 key={blogGroupIndex}>No Blogs.</h1>
-
-                return (
-                    <div key={blogGroupIndex}>
-                        {blogGroupIndex > 0 && (
-                            <div className="w-full h-[1px] bg-gray-100 my-1" />
-                        )}
-
-                        {/* @ts-ignore */}
-                        <BlogItem details={blogItem} />
-                    </div>
-                )
-            })}
+            <BlogGroup details={allDocuments.frameworks} />
         </div>
     )
 }

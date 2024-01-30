@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react'
 import type { BlogItemTypes } from '@/ts'
+import Link from 'next/link'
 
 type BlogPageProps = {
     details: BlogItemTypes
@@ -9,7 +10,22 @@ type BlogPageProps = {
 const Blog: FC<BlogPageProps> = ({ details, children }): ReactNode => {
     return (
         <div className="container max-w-[680px] mx-auto py-[6.5em] px-[3em]">
-            <div className="text-4xl">{details.author}</div>
+            <div className="flex items-end text-4xl">
+                <p>{details.author}</p>
+                <p className="text-xl ms-auto align-middle text-neutral-600">
+                    Github:
+                    <Link
+                        className="ms-3 dark:text-purple-900 dark:hover:text-violet-700"
+                        href={`https://github.com/${details.github.replace(
+                            '@',
+                            ''
+                        )}`}
+                        target="_blank"
+                    >
+                        {details.github}
+                    </Link>
+                </p>
+            </div>
 
             <h1 className="text-4xl cloud-name font-medium my-8">
                 {details.title}
@@ -19,7 +35,7 @@ const Blog: FC<BlogPageProps> = ({ details, children }): ReactNode => {
 
             <p className="flex item-center my-6 text-[1.05em] text-slate-500">
                 <span className="me-6 text-2xl">{details.emoji}</span>
-                <ul>
+                <ul className="flex items-center gap-4">
                     {details.tags.map((tag) => (
                         <li
                             key={tag}
